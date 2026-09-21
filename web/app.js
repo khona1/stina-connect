@@ -147,3 +147,50 @@ document.querySelectorAll("[data-preset]").forEach(button => {
 });
 
 calculate();
+
+
+const comparisonMetrics = [
+  ["ending_terminals", number],
+  ["exit_mrr", money],
+  ["exit_arr", money],
+  ["total_revenue", money],
+  ["total_deployment_capex", money],
+  ["required_capital", money],
+  ["total_profit", money],
+  ["profit_margin", percent],
+  ["break_even_arpu", money]
+];
+
+function renderScenarioComparison(data) {
+  for (const [scenario, summary] of Object.entries(data)) {
+    const key = scenario.toLowerCase();
+    for (const [metric, formatter] of comparisonMetrics) {
+      set(`scenario-${key}-${metric}`, formatter(summary[metric]));
+    }
+  }
+}
+
+async function loadScenarioComparison() {
+  const error = document.getElementById("comparison-error");
+  const loading = document.getElementById("comparison-loading");
+
+  error.textContent = "";
+  loading.classList.remove("hidden");
+
+  try {
+    const response = await fetch(`${API_URL}/scenarios/compare`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.detail || "Scenario comparison failed");
+    }
+
+    renderScenarioComparison(data);
+  } catch (err) {
+    error.textContent = err.message;
+  } finally {
+    loading.classList.add("hidden");
+  }
+}
+
+loadScenarioComparison();
