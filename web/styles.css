@@ -344,3 +344,54 @@ footer {
     flex-direction: column;
   }
 }
+
+
+.comparison {
+  margin-top: 18px;
+}
+
+.comparison-table-wrap {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  text-align: left;
+}
+
+.comparison-table thead th {
+  color: var(--text);
+  background: var(--panel-2);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.comparison-table tbody th {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.comparison-table tbody td {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}

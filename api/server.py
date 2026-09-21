@@ -2,7 +2,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from calculator.stina_connect_calculator import Inputs, calculate, standard_scenarios
+from calculator.stina_connect_calculator import (
+    Inputs,
+    calculate,
+    compare_scenarios,
+    standard_scenarios,
+)
 
 
 app = FastAPI(
@@ -55,6 +60,12 @@ def scenarios():
         name: calculate(inputs)["summary"]
         for name, inputs in standard_scenarios().items()
     }
+
+
+@app.get("/scenarios/compare")
+def scenario_comparison():
+    """Return compact 5K/10K/50K summaries for the comparison dashboard."""
+    return compare_scenarios(standard_scenarios())
 
 
 @app.post("/calculate")
