@@ -1,4 +1,4 @@
-from stina_connect_calculator import (
+from calculator.stina_connect_calculator import (
     Inputs,
     calculate,
     compare_scenarios,

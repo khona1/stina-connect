@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STINA CONNECT network deployment economics calculator">
+  <title>STINA CONNECT — Network Economics Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="brand">STINA <span>CONNECT</span></div>
+      <div class="tagline">Network deployment economics & scenario planning</div>
+    </div>
+    <div class="status">
+      <span class="dot"></span>
+      API ONLINE
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">STINA CONNECT</p>
+      <h1>Model your connectivity deployment.</h1>
+      <p>
+        Change the commercial assumptions below and STINA CONNECT
+        calculates the financial outcome through the live Python engine.
+      </p>
+    </section>
+
+    <section class="presets">
+      <button data-preset="5000">5K terminals</button>
+      <button data-preset="10000">10K terminals</button>
+      <button data-preset="50000">50K terminals</button>
+    </section>
+
+    <section class="workspace">
+      <div class="panel inputs-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">INPUTS</p>
+            <h2>Deployment assumptions</h2>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Starting terminals
+            <input id="starting_terminals" type="number" min="0" step="1" value="5000">
+          </label>
+
+          <label>
+            New terminals / month
+            <input id="new_terminals_per_month" type="number" min="0" step="1" value="0">
+          </label>
+
+          <label>
+            Monthly ARPU
+            <div class="input-prefix">
+              <span>R</span>
+              <input id="monthly_arpu" type="number" min="0" step="0.01" value="30">
+            </div>
+          </label>
+
+          <label>
+            Monthly churn
+            <div class="input-suffix">
+              <input id="monthly_churn_rate" type="number" min="0" max="99.99" step="0.1" value="2">
+              <span>%</span>
+            </div>
+          </label>
+
+          <label>
+            Capacity cost / terminal
+            <div class="input-prefix">
+              <span>R</span>
+              <input id="monthly_capacity_cost_per_terminal" type="number" min="0" step="0.01" value="9">
+            </div>
+          </label>
+
+          <label>
+            Hardware / terminal
+            <div class="input-prefix">
+              <span>R</span>
+              <input id="hardware_cost_per_terminal" type="number" min="0" step="0.01" value="400">
+            </div>
+          </label>
+
+          <label>
+            Installation / terminal
+            <div class="input-prefix">
+              <span>R</span>
+              <input id="installation_cost_per_terminal" type="number" min="0" step="0.01" value="50">
+            </div>
+          </label>
+
+          <label>
+            Initial hardware / terminal
+            <div class="input-prefix">
+              <span>R</span>
+              <input id="initial_hardware_cost_per_terminal" type="number" min="0" step="0.01" value="400">
+            </div>
+          </label>
+
+          <label>
+            Initial installation / terminal
+            <div class="input-prefix">
+              <span>R</span>
+              <input id="initial_installation_cost_per_terminal" type="number" min="0" step="0.01" value="50">
+            </div>
+          </label>
+
+          <label>
+            Model period
+            <div class="input-suffix">
+              <input id="months" type="number" min="1" step="1" value="12">
+              <span>months</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="calculate" class="primary">Calculate deployment</button>
+          <span id="error" class="error"></span>
+        </div>
+      </div>
+
+      <div class="panel results-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">RESULTS</p>
+            <h2>Financial model</h2>
+          </div>
+          <span id="loading" class="loading hidden">Calculating…</span>
+        </div>
+
+        <div class="metrics">
+          <article class="metric featured">
+            <span>Exit ARR</span>
+            <strong id="exit_arr">—</strong>
+            <small>annual recurring revenue</small>
+          </article>
+
+          <article class="metric">
+            <span>Exit MRR</span>
+            <strong id="exit_mrr">—</strong>
+            <small>monthly recurring revenue</small>
+          </article>
+
+          <article class="metric">
+            <span>Total revenue</span>
+            <strong id="total_revenue">—</strong>
+            <small>model period</small>
+          </article>
+
+          <article class="metric">
+            <span>Deployment CAPEX</span>
+            <strong id="total_deployment_capex">—</strong>
+            <small>initial + terminal costs</small>
+          </article>
+
+          <article class="metric">
+            <span>Total profit</span>
+            <strong id="total_profit">—</strong>
+            <small>model period</small>
+          </article>
+
+          <article class="metric">
+            <span>Profit margin</span>
+            <strong id="profit_margin">—</strong>
+            <small>profit / revenue</small>
+          </article>
+
+          <article class="metric">
+            <span>Required capital</span>
+            <strong id="required_capital">—</strong>
+            <small>maximum cash requirement</small>
+          </article>
+
+          <article class="metric">
+            <span>Break-even ARPU</span>
+            <strong id="break_even_arpu">—</strong>
+            <small>per billable terminal</small>
+          </article>
+        </div>
+
+        <div class="summary">
+          <div>
+            <span>Ending terminals</span>
+            <strong id="ending_terminals">—</strong>
+          </div>
+          <div>
+            <span>New terminals</span>
+            <strong id="new_terminals">—</strong>
+          </div>
+          <div>
+            <span>Hardware + installation</span>
+            <strong id="hardware_and_installation">—</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>STINA CONNECT</span>
+      <span>Financial calculations powered by the STINA Python Scenario Engine.</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
