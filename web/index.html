@@ -202,6 +202,42 @@
       </div>
     </section>
 
+    <section class="comparison panel">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">SCENARIO COMPARISON</p>
+          <h2>5K / 10K / 50K deployment view</h2>
+        </div>
+        <span id="comparison-loading" class="loading hidden">Loading…</span>
+      </div>
+
+      <div id="comparison-error" class="error"></div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>5K</th>
+              <th>10K</th>
+              <th>50K</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>Ending terminals</th><td id="scenario-5k-ending_terminals">—</td><td id="scenario-10k-ending_terminals">—</td><td id="scenario-50k-ending_terminals">—</td></tr>
+            <tr><th>Exit MRR</th><td id="scenario-5k-exit_mrr">—</td><td id="scenario-10k-exit_mrr">—</td><td id="scenario-50k-exit_mrr">—</td></tr>
+            <tr><th>Exit ARR</th><td id="scenario-5k-exit_arr">—</td><td id="scenario-10k-exit_arr">—</td><td id="scenario-50k-exit_arr">—</td></tr>
+            <tr><th>Total revenue</th><td id="scenario-5k-total_revenue">—</td><td id="scenario-10k-total_revenue">—</td><td id="scenario-50k-total_revenue">—</td></tr>
+            <tr><th>Deployment CAPEX</th><td id="scenario-5k-total_deployment_capex">—</td><td id="scenario-10k-total_deployment_capex">—</td><td id="scenario-50k-total_deployment_capex">—</td></tr>
+            <tr><th>Required capital</th><td id="scenario-5k-required_capital">—</td><td id="scenario-10k-required_capital">—</td><td id="scenario-50k-required_capital">—</td></tr>
+            <tr><th>Total profit</th><td id="scenario-5k-total_profit">—</td><td id="scenario-10k-total_profit">—</td><td id="scenario-50k-total_profit">—</td></tr>
+            <tr><th>Profit margin</th><td id="scenario-5k-profit_margin">—</td><td id="scenario-10k-profit_margin">—</td><td id="scenario-50k-profit_margin">—</td></tr>
+            <tr><th>Break-even ARPU</th><td id="scenario-5k-break_even_arpu">—</td><td id="scenario-10k-break_even_arpu">—</td><td id="scenario-50k-break_even_arpu">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <footer>
       <span>STINA CONNECT</span>
       <span>Financial calculations powered by the STINA Python Scenario Engine.</span>
